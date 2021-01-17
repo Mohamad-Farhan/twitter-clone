@@ -12,5 +12,10 @@ app.set("view engine", "Pug");
 app.set("views", "views");
 
 app.get("/", (req, res, next) => {
-  res.status(200).render("home");
+
+  const payload = {
+    pageTitle: "Tetra"
+  }
+
+  res.status(200).render("home", payload);
 });
