@@ -3,6 +3,7 @@ const app = express();
 const middleware = require('./middleware');
 const path = require('path');
 const bodyParser = require("body-parser");
+const db = require("./db");
 
 const port = process.env.PORT || 3003;
 
