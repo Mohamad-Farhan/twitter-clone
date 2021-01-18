@@ -13,10 +13,10 @@ class Database {
     connect() {
         mongoose.connect("mongodb+srv://Tetra:147258369@tetra-app.xqlnz.mongodb.net/Tetra?retryWrites=true&w=majority")
             .then(() => {
-                console.log("Database connection successful :)");
+                console.log("DB is connected :)");
             })
             .catch((err) => {
-                console.log("Database connection error :(" + err)
+                console.log("DB is not connected :(" + err)
             })
     };
 };
