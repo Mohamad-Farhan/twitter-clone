@@ -31,7 +31,7 @@ const UserScehma = new Scehma({
     },
     profilePic: {
         type: String,
-        default: "/images/profilePic.png",
+        default: "/images/profilePic.jpeg",
     },
 }, { timestamps: true });
 
