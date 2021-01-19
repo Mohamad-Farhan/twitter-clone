@@ -1,9 +1,13 @@
 :root {
     --blue: #1FA2F1;
+    --blueLight: #9BD1F9;
     --buttonHoverBg: #d4edff;
     --lightGrey: rgb(230, 236, 240);
     --spacing: 15px;
-    --blueLight: #9BD1F9;
+}
+
+*{
+    outline: none !important;
 }
 
 a {
