@@ -8,5 +8,5 @@ const PostSchema = new Schema({
     pinned: Boolean
 }, { timestamps: true });
 
-var Post = mongoose.model('Post', PostSchema);
+const Post = mongoose.model('Post', PostSchema);
 module.exports = Post;

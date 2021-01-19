@@ -26,19 +26,14 @@ app.use(session({
 // Routes
 const loginRoute = require('./routes/loginRoutes');
 const registerRoute = require('./routes/registerRoutes');
-const logout = require('./routes/logout');
 
-// Api routs
-const postsApiRoutes = require('./routes/api/posts');
-
+// Api routes
+const postsApiRoute = require('./routes/api/posts');
 
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
-app.use("/logout", logout);
-app.use("/api/posts", postsApiRoutes);
 
-
-
+app.use("/api/posts", postsApiRoute);
 
 app.get("/", middleware.requireLogin, (req, res, next) => {
 
@@ -48,4 +43,4 @@ app.get("/", middleware.requireLogin, (req, res, next) => {
   }
 
   res.status(200).render("home", payload);
-});
+})
