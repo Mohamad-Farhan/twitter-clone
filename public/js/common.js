@@ -20,7 +20,7 @@ $("#submitPostButton").click((event) => {
         content: textbox.val(),
     }
 
-    $.post("/api/post", data, (postDAta, status, xhr) => {
-        
+    $.post("/api/posts", data, (postData, status, xhr) => {
+        alert(postData)
     })
 });

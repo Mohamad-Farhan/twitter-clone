@@ -28,10 +28,15 @@ const loginRoute = require('./routes/loginRoutes');
 const registerRoute = require('./routes/registerRoutes');
 const logout = require('./routes/logout');
 
+// Api routs
+const postsApiRoutes = require('./routes/api/posts');
+
 
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/logout", logout);
+app.use("/api/posts", postsApiRoutes);
+
 
 
 
