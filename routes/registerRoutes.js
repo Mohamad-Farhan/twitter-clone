@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const bodyParser = require("body-parser")
+const bcrypt = require("bcrypt");
 const User = require('../schemas/UserSchema');
-const bcrypt = require('bcrypt');
 
 app.set("view engine", "pug");
 app.set("views", "views");
@@ -17,44 +17,45 @@ router.get("/", (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
 
-    const firstName = req.body.firstName.trim();
-    const lastName = req.body.lastName.trim();
-    const username = req.body.username.trim();
-    const email = req.body.email.trim();
-    const password = req.body.password;
+    var firstName = req.body.firstName.trim();
+    var lastName = req.body.lastName.trim();
+    var username = req.body.username.trim();
+    var email = req.body.email.trim();
+    var password = req.body.password;
 
-    const payload = req.body;
+    var payload = req.body;
 
-    if (firstName && lastName && username && email && password) {
-        const user = await User.findOne({
+    if(firstName && lastName && username && email && password) {
+        var user = await User.findOne({
             $or: [
                 { username: username },
                 { email: email }
             ]
         })
-            .catch((err) => {
-                console.log(err)
-                payload.errorMessage = "Somthing went wrong";
-                res.status(200).render("register", payload);
-            });
+        .catch((error) => {
+            console.log(error);
+            payload.errorMessage = "Something went wrong.";
+            res.status(200).render("register", payload);
+        });
 
-        if (user == null) {
-            const data = req.body
-            data.password = await bcrypt.hash(password, 15);
+        if(user == null) {
+            // No user found
+            var data = req.body;
+            data.password = await bcrypt.hash(password, 10);
 
             User.create(data)
-                .then((user) => {
-                    req.session.user = user;
-                    return res.redirect('/');
-                })
+            .then((user) => {
+                req.session.user = user;
+                return res.redirect("/");
+            })
         }
         else {
-            //
+            // User found
             if (email == user.email) {
-                payload.errorMessage = "Email has aleready used."
+                payload.errorMessage = "Email already in use.";
             }
             else {
-                payload.errorMessage = "Username has already used."
+                payload.errorMessage = "Username already in use.";
             }
             res.status(200).render("register", payload);
         }

@@ -20,7 +20,14 @@ $("#submitPostButton").click((event) => {
         content: textbox.val(),
     }
 
-    $.post("/api/posts", data, (postData, status, xhr) => {
-        console.log(postData)
+    $.post("/api/posts", data, postData => {
+        const html = cratePostHtml(postData)
+        $(".postsContainer").prepend(html);
+        textbox.val("");
+        button.prop("disabled", true);
     })
 });
+
+function cratePostHtml(postData) {
+    return postData.content;
+};
