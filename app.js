@@ -38,7 +38,7 @@ app.use("/logout", logout);
 app.get("/", middleware.requireLogin, (req, res, next) => {
 
   const payload = {
-    pageTitle: "Tetra || Home",
+    pageTitle: "Home",
     userLoggedIn: req.session.user
   }
 

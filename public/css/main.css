@@ -1,6 +1,13 @@
 :root {
     --blue: #0ACAF7;
-    --buttonHoverBg: #d4edff
+    --buttonHoverBg: #d4edff ;
+    --lightGrery: rgb(230, 236, 240);
+    --spacing: 15px;
+}
+h1{
+    font-size: 19px;
+    font-weight: none;
+    margin: 0;
 }
 
 a {
@@ -35,10 +42,24 @@ nav a.blue {
 
 nav a:hover {
     background-color: var(--buttonHoverBg);
-    color: var(--blue); 
+    color: var(--blue);
     border-radius: 50%;
 }
 
 .mainSectionContainer {
-    background-color: blue;
+    padding: 0;
+    border-left: 1px solid var(--lightGrery);
+    border-right: 1px solid var(--lightGrery);
+    flex-direction: column;
+}
+.titleContainer{
+   height: 53px;
+   padding: 0 var(--spacing); 
+   display: flex;
+   align-items: center;
+   border-bottom: 1px solid var(--lightGrery);
+   flex-shrink: 0;
+}
+.titleContainer h1{
+    flex: 1;
 }
