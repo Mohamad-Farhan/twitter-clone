@@ -4,6 +4,7 @@ block content
     .loginContainer
         h1 Login
         form(method="post")
+
             p.errorMessage #{errorMessage}
 
             input(type="text", name="logUsername", placeholder="Username or email", value=logUsername required="")
