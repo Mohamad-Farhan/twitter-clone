@@ -13,19 +13,19 @@ const UserScehma = new Scehma({
         required: true,
         trim: true
     },
-    username:{
+    username: {
         type: String,
         required: true,
         trim: true,
         unique: true,
     },
-    email:{
+    email: {
         type: String,
         required: true,
         trim: true,
         unique: true,
     },
-    password:{
+    password: {
         type: String,
         required: true,
     },
@@ -33,7 +33,7 @@ const UserScehma = new Scehma({
         type: String,
         default: "/images/profilePic.png",
     },
-});
+}, { timestamps: true });
 
 const User = mongoose.model('User', UserScehma);
 module.exports = User;
