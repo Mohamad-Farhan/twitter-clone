@@ -43,7 +43,10 @@ router.post("/", async (req, res, next) => {
             data.password = await bcrypt.hash(password, 15);
 
             User.create(data)
-                .then()
+                .then((user) => {
+                    req.session.user = user;
+                    return res.redirect('/');
+                })
         }
         else {
             //

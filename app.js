@@ -4,6 +4,7 @@ const middleware = require('./middleware');
 const path = require('path');
 const bodyParser = require("body-parser");
 const db = require("./db");
+const session = require('express-session');
 
 const port = process.env.PORT || 3003;
 
@@ -16,6 +17,11 @@ app.set("views", "views");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(session({
+  secret: "Tetra",
+  resave: true,
+  saveUninitialized: false,
+}));
 
 // Routes
 const loginRoute = require('./routes/loginRoutes');
@@ -28,7 +34,8 @@ app.use("/register", registerRoute);
 app.get("/", middleware.requireLogin, (req, res, next) => {
 
   const payload = {
-    pageTitle: "Tetra"
+    pageTitle: "Tetra || Home",
+    userLoggedIn: req.session.user
   }
 
   res.status(200).render("home", payload);
