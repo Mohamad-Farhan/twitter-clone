@@ -14,7 +14,7 @@ $("#postTextarea").keyup(event => {
     submitButton.prop("disabled", false);
 })
 
-$("#submitPostButton").click(() => {
+$("#submitPostButton").click((event) => {
     const button = $(event.target);
     const textbox = $("#postTextarea");
 
