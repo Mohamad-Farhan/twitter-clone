@@ -30,9 +30,21 @@ $("#submitPostButton").click((event) => {
         button.prop("disabled", true);
     })
 });
-$(document).on('click', '.likeButton', () => {
-    alert('button click')
-})
+$(document).on('click', '.likeButton', (event) => {
+    const button = $(event.target);
+    const postId = getPostIdFromElement(button);
+    console.log(postId);
+});
+
+const getPostIdFromElement = (element) => {
+    const isRoot = element.hasClass('post')
+    const rootElement = isRoot == true ? element : element.closest(".post");
+    const postId = rootElement.data().id;
+
+    if(postId === undefined) return alert('Post id undefined');
+
+    return postId;
+}
 
 const createPostHtml = (postData) => {
 
@@ -45,7 +57,7 @@ const createPostHtml = (postData) => {
     const displayName = postedBy.firstName + " " + postedBy.lastName;
     const timestamp = timeDifference(new Date(), new Date(postData.createdAt));
 
-    return `<div class='post'>
+    return `<div class='post' data-id='${postData._id}'>
 
                 <div class='mainContentContainer'>
                     <div class='userImageContainer'>
