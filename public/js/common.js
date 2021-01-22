@@ -29,6 +29,9 @@ $("#submitPostButton").click((event) => {
         textbox.val("");
         button.prop("disabled", true);
     })
+});
+$(document).on('click', '.likeButton', () => {
+    alert('button click')
 })
 
 const createPostHtml = (postData) => {
@@ -69,7 +72,7 @@ const createPostHtml = (postData) => {
                                 </button>
                             </div>
                             <div class='postButtonContainer'>
-                                <button>
+                                <button class='likeButton'>
                                     <i class='far fa-heart'></i>
                                 </button>
                             </div>
