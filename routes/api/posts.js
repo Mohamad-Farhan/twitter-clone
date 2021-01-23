@@ -12,8 +12,11 @@ router.get("/", (req, res, next) => {
         .populate("postedBy")
         .sort({ "createdAt": -1 })
         .then(results => res.status(200).send(results))
-        .catch(err => console.log(err))
-});
+        .catch(error => {
+            console.log(error);
+            res.sendStatus(400);
+        })
+})
 
 router.post("/", async (req, res, next) => {
 
@@ -49,13 +52,19 @@ router.put("/:id/like", async (req, res, next) => {
     const option = isLiked ? '$pull' : '$addToSet'
 
     req.session.user = await User.findByIdAndUpdate(userId, { [option]: { likes: postId } }, { new: true })
-        .catch(err => {
-            console.log(err);
+        .catch(error => {
+            console.log(error);
+            res.sendStatus(400);
+        })
+
+    const post = await Post.findByIdAndUpdate(postId, { [option]: { likes: userId } }, { new: true })
+        .catch(error => {
+            console.log(error);
             res.sendStatus(400);
         })
 
 
-    res.status(200).send("nice")
-})
+    res.status(200).send(post);
+});
 
 module.exports = router;

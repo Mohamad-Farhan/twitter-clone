@@ -29,8 +29,9 @@ $("#submitPostButton").click((event) => {
         textbox.val("");
         button.prop("disabled", true);
     })
-});
-$(document).on('click', '.likeButton', (event) => {
+})
+
+$(document).on("click", ".likeButton", (event) => {
     const button = $(event.target);
     const postId = getPostIdFromElement(button);
 
@@ -40,27 +41,28 @@ $(document).on('click', '.likeButton', (event) => {
         url: `/api/posts/${postId}/like`,
         type: "PUT",
         success: (postData) => {
-            console.log(postData);
+            console.log(postData.likes.length);
         }
     })
-});
+
+})
 
 const getPostIdFromElement = (element) => {
     const isRoot = element.hasClass('post')
     const rootElement = isRoot == true ? element : element.closest(".post");
     const postId = rootElement.data().id;
 
-    if (postId === undefined) return alert('Post id undefined');
+    if (postId === undefined) return alert("Post id undefined");
 
     return postId;
 }
 
-const createPostHtml = (postData) => {
+function createPostHtml(postData) {
 
     const postedBy = postData.postedBy;
 
     if (postedBy._id === undefined) {
-        return console.log("User object not populate");
+        return console.log("User object not populated");
     }
 
     const displayName = postedBy.firstName + " " + postedBy.lastName;
@@ -115,6 +117,7 @@ const timeDifference = (current, previous) => {
 
     if (elapsed < msPerMinute) {
         if (elapsed / 1000 < 30) return "Just now";
+
         return Math.round(elapsed / 1000) + ' seconds ago';
     }
 
