@@ -5,7 +5,8 @@
     --lightGrey: rgb(230, 236, 240);
     --spacing: 15px;
     --greyText: rgb(101, 119, 134);
-    --greyButtonText: rgba(0,0,0,0.34);
+    --greyButtonText: rgba(0, 0, 0, 0.34);
+    --red: rgb(226, 34, 94);
 }
 
 * {
@@ -62,12 +63,12 @@ button {
 }
 
 button i,
-button span{
+button span {
     pointer-events: none;
 }
 
 .mainSectionContainer {
-    padding:  0;
+    padding: 0;
     border-left: 1px solid var(--lightGrey);
     border-right: 1px solid var(--lightGrey);
     display: flex;
@@ -186,4 +187,8 @@ button span{
     background-color: #d4edff;
     color: var(--blue);
     border-radius: 50%;
+}
+
+.postButtonContainer.red button.active {
+    color: var(--red);
 }
