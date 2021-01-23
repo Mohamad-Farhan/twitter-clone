@@ -37,6 +37,18 @@ router.post("/", async (req, res, next) => {
             console.log(error);
             res.sendStatus(400);
         })
+});
+
+router.put("/:id/like", async (req, res, next) => {
+
+    const postId = req.params.id;
+    const userId = req.session.user._id;
+
+    const isLiked = req.session.user.likes && req.session.user.likes.includes(postId);
+
+    
+
+    res.status(200).send("nice")
 })
 
 module.exports = router;

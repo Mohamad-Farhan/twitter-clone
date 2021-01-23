@@ -33,7 +33,16 @@ $("#submitPostButton").click((event) => {
 $(document).on('click', '.likeButton', (event) => {
     const button = $(event.target);
     const postId = getPostIdFromElement(button);
-    console.log(postId);
+
+    if (postId === undefined) return;
+
+    $.ajax({
+        url: `/api/posts/${postId}/like`,
+        type: "PUT",
+        success: (postData) => {
+            console.log(postData);
+        }
+    })
 });
 
 const getPostIdFromElement = (element) => {
@@ -41,7 +50,7 @@ const getPostIdFromElement = (element) => {
     const rootElement = isRoot == true ? element : element.closest(".post");
     const postId = rootElement.data().id;
 
-    if(postId === undefined) return alert('Post id undefined');
+    if (postId === undefined) return alert('Post id undefined');
 
     return postId;
 }
@@ -51,7 +60,7 @@ const createPostHtml = (postData) => {
     const postedBy = postData.postedBy;
 
     if (postedBy._id === undefined) {
-        return console.log("USer object not populate");
+        return console.log("User object not populate");
     }
 
     const displayName = postedBy.firstName + " " + postedBy.lastName;
