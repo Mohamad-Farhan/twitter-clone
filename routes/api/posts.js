@@ -49,7 +49,7 @@ router.put("/:id/like", async (req, res, next) => {
 
     const isLiked = req.session.user.likes && req.session.user.likes.includes(postId);
 
-    const option = isLiked ? '$pull' : '$addToSet'
+    const option = isLiked ? "$pull" : "$addToSet";
 
     req.session.user = await User.findByIdAndUpdate(userId, { [option]: { likes: postId } }, { new: true })
         .catch(error => {
@@ -64,11 +64,10 @@ router.put("/:id/like", async (req, res, next) => {
         })
 
 
-    res.status(200).send(post);
-});
+    res.status(200).send(post)
+})
 
 router.post("/:id/retweet", async (req, res, next) => {
-
     const postId = req.params.id;
     const userId = req.session.user._id;
 
@@ -78,24 +77,32 @@ router.post("/:id/retweet", async (req, res, next) => {
             res.sendStatus(400);
         })
 
-    const option = deletedPost != null ? '$pull' : '$addToSet';
+    const option = deletedPost != null ? "$pull" : "$addToSet";
 
-    return res.status(200).send(option);
+    const repost = deletedPost;
 
-    req.session.user = await User.findByIdAndUpdate(userId, { [option]: { likes: postId } }, { new: true })
+    if (repost == null) {
+        repost = await Post.create({ postedBy: userId, retweetData: postId })
+            .catch(error => {
+                console.log(error);
+                res.sendStatus(400);
+            })
+    }
+
+    req.session.user = await User.findByIdAndUpdate(userId, { [option]: { retweets: repost._id } }, { new: true })
         .catch(error => {
             console.log(error);
             res.sendStatus(400);
         })
 
-    const post = await Post.findByIdAndUpdate(postId, { [option]: { likes: userId } }, { new: true })
+    const post = await Post.findByIdAndUpdate(postId, { [option]: { retweetUsers: userId } }, { new: true })
         .catch(error => {
             console.log(error);
             res.sendStatus(400);
         })
 
 
-    res.status(200).send(post);
-});
+    res.status(200).send(post)
+})
 
 module.exports = router;
