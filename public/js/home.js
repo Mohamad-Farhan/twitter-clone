@@ -4,7 +4,7 @@ $(document).ready(() => {
     })
 })
 
-function outputPosts(results, container) {
+const outputPosts = (results, container) => {
     container.html("");
 
     results.forEach(result => {

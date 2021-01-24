@@ -12,7 +12,7 @@ const server = app.listen(port, () => {
   console.log(`Server is runing at http://localhost:${port}`);
 });
 
-app.set("view engine", "Pug");
+app.set("view engine", "pug");
 app.set("views", "views");
 
 app.use(bodyParser.urlencoded({ extended: false }));
