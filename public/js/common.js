@@ -50,11 +50,34 @@ $(document).on("click", ".likeButton", (event) => {
             else {
                 button.removeClass("active");
             }
-
         }
-    })
+    });
+});
 
-})
+$(document).on("click", ".retweetButton", (event) => {
+    const button = $(event.target);
+    const postId = getPostIdFromElement(button);
+
+    if (postId === undefined) return;
+
+    $.ajax({
+        url: `/api/posts/${postId}/retweet`,
+        type: "POST",
+        success: (postData) => {
+            console.log(postData)
+            // button.find("span").text(postData.likes.length || "");
+
+            // if (postData.likes.includes(userLoggedIn._id)) {
+            //     button.addClass("active");
+            // }
+            // else {
+            //     button.removeClass("active");
+            // }
+        }
+    });
+});
+
+
 
 const getPostIdFromElement = (element) => {
     const isRoot = element.hasClass('post')
@@ -66,7 +89,7 @@ const getPostIdFromElement = (element) => {
     return postId;
 }
 
-function createPostHtml(postData) {
+const createPostHtml = (postData) => {
 
     const postedBy = postData.postedBy;
 
@@ -100,7 +123,7 @@ function createPostHtml(postData) {
                                 </button>
                             </div>
                             <div class='postButtonContainer green'>
-                                <button class='retweet'>
+                                <button class='retweetButton'>
                                     <i class='fas fa-retweet'></i>
                                 </button>
                             </div>
