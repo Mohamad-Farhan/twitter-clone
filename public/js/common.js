@@ -2,8 +2,6 @@ $("#postTextarea").keyup(event => {
     const textbox = $(event.target);
     const value = textbox.val().trim();
 
-    let isModal = textbox.parents(".modal").length == 1;
-
     const submitButton = $("#submitPostButton");
 
     if (submitButton.length == 0) return alert("No submit button found");
@@ -32,7 +30,7 @@ $("#replyTextarea").keyup(event => {
     submitButton.prop("disabled", false);
 });
 
-$("#submitPostButton").click(() => {
+$("#submitPostButton").click((event) => {
     const button = $(event.target);
     const textbox = $("#postTextarea");
 
@@ -47,10 +45,19 @@ $("#submitPostButton").click(() => {
         textbox.val("");
         button.prop("disabled", true);
     })
-})
+});
+
+$("#replyModel").on("show.bs.modal", (event) => {
+    const button = $(event.relatedTarget);
+    const postId = getPostIdFromElement(button);
+
+    $.get(`/api/posts/${postId}`, results => {
+        console.log(results);
+    })
+});
 
 $(document).on("click", ".likeButton", (event) => {
-    const button = $(event.target);
+    const button = $(event.relatedTarget);
     const postId = getPostIdFromElement(button);
 
     if (postId === undefined) return;
@@ -115,8 +122,6 @@ const createPostHtml = (postData) => {
     const isRetweet = postData.retweetData !== undefined;
     const retweetedBy = isRetweet ? postData.postedBy.username : null;
     postData = isRetweet ? postData.retweetData : postData;
-
-    console.log(isRetweet);
 
     const postedBy = postData.postedBy;
 
