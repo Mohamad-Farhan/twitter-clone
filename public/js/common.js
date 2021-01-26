@@ -65,7 +65,7 @@ $("#replyModel").on("show.bs.modal", (event) => {
     $("#submitReplyButton").data("id", postId);
 
     $.get(`/api/posts/${postId}`, results => {
-        outputPosts(results, $('#originalPostContainer'));
+        outputPosts(results.postData, $('#originalPostContainer'));
     })
 });
 
@@ -276,4 +276,21 @@ const outputPosts = (results, container) => {
     if (results.length == 0) {
         container.append("<span class='noResults'>Nothing to show.</span>")
     }
+}
+
+const outputPostsWithReplies = (results, container) => {
+    container.html("");
+
+    if (results.replyTo !== undefined && results.replyTo._id !== undefined) {
+        let html = createPostHtml(results.replyTo)
+        container.append(html);
+    }
+
+    let mainPostHtml = createPostHtml(results.postData)
+    container.append(mainPostHtml);
+
+    results.replyies.forEach(result => {
+        let html = createPostHtml(result)
+        container.append(html);
+    });
 }

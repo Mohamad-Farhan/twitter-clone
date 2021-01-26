@@ -33,7 +33,7 @@ const postsApiRoute = require('./routes/api/posts');
 
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
-app.use("/post", postRoutes);
+app.use("/post", middleware.requireLogin, postRoutes);
 
 app.use("/api/posts", postsApiRoute);
 

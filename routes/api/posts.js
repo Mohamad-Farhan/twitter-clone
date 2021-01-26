@@ -14,10 +14,21 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
 
-    const postId = req.params.id;
+    let postId = req.params.id;
 
-    let results = await getPosts({ _id: postId });
-    results = results[0];
+    let postData = await getPosts({ _id: postId });
+    postData = postData[0];
+
+    let results = {
+        postData: postData
+    }
+
+    if (postData.replyTo !== undefined) {
+        results.replyTo = postData.replyTo;
+    }
+
+    results.replyies = await getPosts({ replyTo: postId });
+
     res.status(200).send(results);
 });
 
@@ -46,7 +57,7 @@ router.post("/", async (req, res, next) => {
             console.log(error);
             res.sendStatus(400);
         })
-})
+});
 
 router.put("/:id/like", async (req, res, next) => {
 
@@ -73,7 +84,7 @@ router.put("/:id/like", async (req, res, next) => {
 
 
     res.status(200).send(post)
-})
+});
 
 router.post("/:id/retweet", async (req, res, next) => {
     let postId = req.params.id;
@@ -126,5 +137,5 @@ const getPosts = async (filter) => {
     results = await User.populate(results, { path: "replyTo.postedBy" });
     return await User.populate(results, { path: "retweetData.postedBy" });
 
-}
+};
 module.exports = router;
