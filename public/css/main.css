@@ -104,7 +104,7 @@ button span {
     padding-top: var(--spacing);
 }
 
-.modal .post{
+.modal .post {
     padding: 0 0 var(--spacing) 0;
 }
 
@@ -225,4 +225,12 @@ button span {
     font-size: 13px;
     color: var(--greyText);
     margin-bottom: 5px;
+}
+
+.replyFlag {
+    margin-bottom: 5px;
+}
+
+.replyFlag a {
+    color: var(--blue);
 }
