@@ -1,8 +1,8 @@
 $("#postTextarea").keyup(event => {
-    const textbox = $(event.target);
-    const value = textbox.val().trim();
+    let textbox = $(event.target);
+    let value = textbox.val().trim();
 
-    const submitButton = $("#submitPostButton");
+    let submitButton = $("#submitPostButton");
 
     if (submitButton.length == 0) return alert("No submit button found");
 
@@ -15,10 +15,10 @@ $("#postTextarea").keyup(event => {
 });
 
 $("#replyTextarea").keyup(event => {
-    const textbox = $(event.target);
-    const value = textbox.val().trim();
+    let textbox = $(event.target);
+    let value = textbox.val().trim();
 
-    const submitButton = $("#submitReplyButton");
+    let submitButton = $("#submitReplyButton");
 
     if (submitButton.length == 0) return alert("No submit button found");
 
@@ -51,7 +51,6 @@ $("#submitPostButton, #submitReplyButton").click((event) => {
         if (postData.replyTo) {
             location.reload();
         } else {
-
             const html = createPostHtml(postData);
             $(".postsContainer").prepend(html);
             textbox.val("");
@@ -62,9 +61,8 @@ $("#submitPostButton, #submitReplyButton").click((event) => {
 
 $("#replyModel").on("show.bs.modal", (event) => {
     const button = $(event.relatedTarget);
-    const postId = getPostIdFromElement(button);
-
-    $('#submitReplyButton').data('id', postId);
+    let postId = getPostIdFromElement(button);
+    $("#submitReplyButton").data("id", postId);
 
     $.get(`/api/posts/${postId}`, results => {
         outputPosts(results, $('#originalPostContainer'));
@@ -74,8 +72,8 @@ $("#replyModel").on("show.bs.modal", (event) => {
 $("#replyModel").on("hidden.bs.modal", () => $('#originalPostContainer').html(""));
 
 $(document).on("click", ".likeButton", (event) => {
-    const button = $(event.relatedTarget);
-    const postId = getPostIdFromElement(button);
+    const button = $(event.target);
+    let postId = getPostIdFromElement(button);
 
     if (postId === undefined) return;
 
@@ -100,7 +98,7 @@ $(document).on("click", ".likeButton", (event) => {
 
 $(document).on("click", ".retweetButton", (event) => {
     const button = $(event.target);
-    const postId = getPostIdFromElement(button);
+    let postId = getPostIdFromElement(button);
 
     if (postId === undefined) return;
 
@@ -122,10 +120,19 @@ $(document).on("click", ".retweetButton", (event) => {
 
 })
 
+$(document).on("click", ".post", (event) => {
+    const element = $(event.target);
+    let postId = getPostIdFromElement(element);
+
+    if (postId !== undefined && !element.is("button")) {
+        window.location.href = '/post/' + postId;
+    }
+});
+
 const getPostIdFromElement = (element) => {
     const isRoot = element.hasClass("post");
     const rootElement = isRoot == true ? element : element.closest(".post");
-    const postId = rootElement.data().id;
+    let postId = rootElement.data().id;
 
     if (postId === undefined) return alert("Post id undefined");
 
@@ -163,11 +170,9 @@ const createPostHtml = (postData) => {
     let replyFlag = '';
     if (postData.replyTo) {
         if (!postData.replyTo._id) {
-            return alert('Replay to is not populated');
-        } else {
-            if (!postData.replyTo._id) {
-                return alert('Posted by to is not populated');
-            }
+            return alert("Reply to is not populated");
+        } else if (!postData.replyTo.postedBy._id) {
+            return alert("Posted by is not populated");
         }
 
         const replyToUsername = postData.replyTo.postedBy.username;
