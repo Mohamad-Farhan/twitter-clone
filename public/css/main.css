@@ -1,6 +1,10 @@
 :root {
-    --blue: #1FA2F1;
-    --blueLight: #9BD1F9;
+    /* --blue: #1FA2F1; */
+    --blue: #FD9600;
+    /* --blue: #019E4D; */
+    /* --blueLight: #9BD1F9; */
+    --blueLight: #fd98009a;
+    /* --blueLight: #01fa79b0; */
     --buttonHoverBg: #d4edff;
     --lightGrey: rgb(230, 236, 240);
     --spacing: 15px;

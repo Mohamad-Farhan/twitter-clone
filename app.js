@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const db = require("./db");
 const session = require('express-session');
+require('dotenv').config()
 
 const port = process.env.PORT || 3003;
 

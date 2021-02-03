@@ -15,9 +15,9 @@ body {
     border: 1px solid #dedede;
     background-color: #fff;
     text-align: center;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 form {
@@ -27,7 +27,8 @@ form {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="phoneNumber"] {
     margin-bottom: 20px;
     padding: 5px 10px;
     border-radius: 2px;
@@ -36,7 +37,8 @@ input[type="password"] {
 }
 
 input[type="submit"] {
-    background-color: #0099ff;
+    background-color: #81FE1F;
+    /* background-color: #0099ff; */
     color: #fff;
     border: none;
     border-radius: 2px;

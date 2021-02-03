@@ -17,10 +17,10 @@ router.get("/", (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
 
-    var payload = req.body;
+    const payload = req.body;
 
     if(req.body.logUsername && req.body.logPassword) {
-        var user = await User.findOne({
+        const user = await User.findOne({
             $or: [
                 { username: req.body.logUsername },
                 { email: req.body.logUsername }
@@ -33,7 +33,7 @@ router.post("/", async (req, res, next) => {
         });
         
         if(user != null) {
-            var result = await bcrypt.compare(req.body.logPassword, user.password);
+            const result = await bcrypt.compare(req.body.logPassword, user.password);
 
             if(result === true) {
                 req.session.user = user;

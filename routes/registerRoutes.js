@@ -17,37 +17,39 @@ router.get("/", (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
 
-    var firstName = req.body.firstName.trim();
-    var lastName = req.body.lastName.trim();
-    var username = req.body.username.trim();
-    var email = req.body.email.trim();
-    var password = req.body.password;
+    const firstName = req.body.firstName.trim();
+    const lastName = req.body.lastName.trim();
+    const username = req.body.username.trim();
+    const email = req.body.email.trim();
+    const phoneNumber = req.body.phoneNumber.trim();
+    const password = req.body.password;
 
-    var payload = req.body;
+    const payload = req.body;
 
-    if(firstName && lastName && username && email && password) {
+    if (firstName && lastName && username && email && password && phoneNumber) {
         var user = await User.findOne({
             $or: [
                 { username: username },
-                { email: email }
+                { email: email },
+                { phoneNumber: phoneNumber }
             ]
         })
-        .catch((error) => {
-            console.log(error);
-            payload.errorMessage = "Something went wrong.";
-            res.status(200).render("register", payload);
-        });
+            .catch((error) => {
+                console.log(error);
+                payload.errorMessage = "Something went wrong.";
+                res.status(200).render("register", payload);
+            });
 
-        if(user == null) {
+        if (user == null) {
             // No user found
-            var data = req.body;
+            const data = req.body;
             data.password = await bcrypt.hash(password, 10);
 
             User.create(data)
-            .then((user) => {
-                req.session.user = user;
-                return res.redirect("/");
-            })
+                .then((user) => {
+                    req.session.user = user;
+                    return res.redirect("/");
+                })
         }
         else {
             // User found
