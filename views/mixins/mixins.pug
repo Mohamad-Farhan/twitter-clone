@@ -26,7 +26,7 @@ mixin createReplyModal(userLoggedIn)
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                     button#submitReplyButton.btn.btn-primary(type='button', disabled="") Reply
 mixin createDeletePostModal()
-    #deletePostModel.modal.fade(tabindex='-1', role='dialog', aria-labelledby='deletePostModalLabel', aria-hidden='true')
+    #deletePostModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='deletePostModalLabel', aria-hidden='true')
         .modal-dialog(role='document')
             .modal-content
                 .modal-header
