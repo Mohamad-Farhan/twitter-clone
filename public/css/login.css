@@ -1,5 +1,5 @@
 body {
-    background-color: #0099ff;
+    background-color: #FD9600;
 }
 
 .wrapper {
@@ -37,8 +37,8 @@ input[type="phoneNumber"] {
 }
 
 input[type="submit"] {
-    background-color: #81FE1F;
-    /* background-color: #0099ff; */
+    /* background-color: #81FE1F; */
+    background-color: #FD9600;
     color: #fff;
     border: none;
     border-radius: 2px;
