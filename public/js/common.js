@@ -71,6 +71,17 @@ $("#replyModel").on("show.bs.modal", (event) => {
 
 $("#replyModel").on("hidden.bs.modal", () => $('#originalPostContainer').html(""));
 
+$("#deletePostModal").on("show.bs.modal", (event) => {
+    const button = $(event.relatedTarget);
+    let postId = getPostIdFromElement(button);
+    $("#deletePostButton").data("id", postId);
+    console.log($("#deletePostButton").data().id)
+
+    // $.get(`/api/posts/${postId}`, results => {
+    //     outputPosts(results.postData, $('#originalPostContainer'));
+    // })
+});
+
 $(document).on("click", ".likeButton", (event) => {
     const button = $(event.target);
     let postId = getPostIdFromElement(button);
