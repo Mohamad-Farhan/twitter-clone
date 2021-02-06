@@ -1,8 +1,5 @@
 const express = require('express');
-const app = express();
 const router = express.Router();
-const bodyParser = require("body-parser")
-const bcrypt = require("bcrypt");
 const User = require('../schemas/UserSchema');
 
 router.get("/", (req, res, next) => {
@@ -19,7 +16,7 @@ router.get("/", (req, res, next) => {
 
 router.get("/:username", async (req, res, next) => {
 
-    const payload = await getPayload(req.params.username, req.session.user);
+    let payload = await getPayload(req.params.username, req.session.user);
 
     res.status(200).render("profilePage", payload);
 });
@@ -29,7 +26,7 @@ const getPayload = async (username, userLoggedIn) => {
 
     if (user == null) {
 
-        user = await User.findById({ username: username })
+        user = await User.findById(username);
 
         if (user == null) {
             return {
