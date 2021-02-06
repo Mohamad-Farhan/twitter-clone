@@ -4,7 +4,11 @@ block content
     if !profileUser
         h2.errorMessage Check the URL you are trying to access.
     else 
-        span  #{profileUser.firstName}
+        .profileHeaderContainer     
+            .coverPhotoContainer
+
+                .userImageContainer
+                    img(src=profileUser.profilePic, alt="User profile image")
         .postsContainer
 
     +createPostModals(userLoggedIn)
