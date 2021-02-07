@@ -297,3 +297,26 @@ button span {
     background-color: var(--blue);
     color: #fff;
 }
+
+.profileHeaderContainer .userDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--spacing);
+}
+
+.followersCntainer .value {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.followersCntainer span:not(.value) {
+    color: var(--greyText);
+}
+
+.followersCntainer a {
+    margin-right: 15px;
+}
+
+.followersCntainer a:hover {
+    border-bottom: 1px solid #000;
+}
