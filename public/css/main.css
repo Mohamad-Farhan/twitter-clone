@@ -5,7 +5,7 @@
     --blueLight: #9BD1F9;
     /* --blueLight: #fd98009a; */
     /* --blueLight: #01fa79b0; */
-    --blueBackground: rgba(212, 237, 255,0.6);
+    --blueBackground: rgba(212, 237, 255, 0.6);
     --buttonHoverBg: #d4edff;
     --lightGrey: rgb(230, 236, 240);
     --spacing: 15px;
@@ -277,7 +277,8 @@ button span {
     height: 66px;
 }
 
-.profileButton {
+.profileButton,
+.followButton {
     border: 1px solid var(--blue);
     color: var(--blue);
     font-weight: bold;
@@ -287,6 +288,7 @@ button span {
     margin-left: var(--spacing);
 }
 
-.profileButton:hover {  
+.profileButton:hover,
+.followButton:hover {
     background-color: var(--blueBackground);
 }
