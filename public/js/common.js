@@ -111,7 +111,7 @@ $(document).on("click", ".likeButton", (event) => {
         }
     })
 
-})
+});
 
 $(document).on("click", ".retweetButton", (event) => {
     const button = $(event.target);
@@ -135,7 +135,7 @@ $(document).on("click", ".retweetButton", (event) => {
         }
     })
 
-})
+});
 
 $(document).on("click", ".post", (event) => {
     const element = $(event.target);
@@ -144,6 +144,11 @@ $(document).on("click", ".post", (event) => {
     if (postId !== undefined && !element.is("button")) {
         window.location.href = '/post/' + postId;
     }
+});
+
+$(document).on("click", ".followButton", (event) => {
+    const button = $(event.target);
+    const userId = button.data().user;
 });
 
 const getPostIdFromElement = (element) => {
