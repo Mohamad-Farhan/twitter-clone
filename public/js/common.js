@@ -154,16 +154,14 @@ $(document).on("click", ".followButton", (event) => {
         url: `/api/users/${userId}/follow`,
         type: "PUT",
         success: (data) => {
-            console.log(data)
-            // button.find("span").text(postData.retweetUsers.length || "");
-
-            // if (postData.retweetUsers.includes(userLoggedIn._id)) {
-            //     button.addClass("active");
-            // }
-            // else {
-            //     button.removeClass("active");
-            // }
-
+            if (data.following && data.following.includes(userId)) {
+                button.addClass("following");
+                button.text("Following");
+            }
+            else {
+                button.removeClass("following");
+                button.text("Follow");
+            }
         }
     });
 });
